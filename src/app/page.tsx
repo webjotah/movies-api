@@ -4,27 +4,24 @@ import Button from '@/components/Button'
 import { MyContextProvider } from '@/context/Context'
 import ApiComponent from '@/request/Request'
 import GenreSelection from '@/components/GenreSelection'
-import { useMyContext } from '@/context/Context'
+import Link from 'next/link'
+import MovieSelection from '@/request/MovieRequest'
+import Movie from './movie/page'
 
-const Page: React.FC = () => {
-
-  const { movieSelected, setMovieSelected } = useMyContext();
-  
+export default function Page(){
   return (
     <>
     <div>
-      {!movieSelected ? (
+      <button><Link href="/movie"> Teste aaaaa</Link></button>
       <MyContextProvider>
         <GenreSelection />
         <Button />
         <ApiComponent />
+        <MovieSelection />
+        <Movie />
       </MyContextProvider>
-      ) : (
-        <h3> NAAOOOO </h3>
-      )}
     </div>
     </>
   )
-}
 
-export default Page;
+}
