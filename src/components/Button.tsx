@@ -7,7 +7,7 @@ const Button: React.FC = () => {
 
   return (
     <div>
-    <button onClick={() => {setPage(page + 1)}}> proxima </button> <br/>
+    <button onClick={() => {setPage(page + 1); localStorage.clear()}}> proxima </button> <br/>
     <button onClick={() => {page > 1 ? setPage(page - 1) : setPage(1)}}>anterior</button>
     </div>
   )
