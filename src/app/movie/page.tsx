@@ -1,21 +1,32 @@
 "use client"
 
-import { useMyContext } from "@/context/Context";
-import { dialogClasses } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const Movie: React.FC = () => {
-  const { changed } = useMyContext();
-  var teste =localStorage.getItem('titulo');
-  var sim = false;
+
+  const [storedTitle, setStoredTitle] = useState<any>(null);
+  
+
   useEffect(() => {
-    teste = localStorage.getItem('titulo');
-    console.log(teste);
-  }, [localStorage.getItem('titulo')]);
+
+    const handleStorageChange = () => {
+      setTimeout(() => {
+        const newTitle = localStorage.getItem('titulo');
+        setStoredTitle(newTitle);
+      }, 500);
+    };
+
+
+    handleStorageChange();
+  }, []);
+
+  console.log(storedTitle);
 
   return (
-    <div> {teste} </div>
-  )
+    <div>
+      <h2>Título do Filme: {storedTitle}</h2>
+    </div>
+  );
 };
 
 export default Movie;

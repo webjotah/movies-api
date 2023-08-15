@@ -13,10 +13,6 @@ interface ContextProps {
   setGenresId: (value: number[]) => void;
   movieSelected: number;
   setMovieSelected: (value: number) => void;
-  changed: boolean;
-  setChanged: (value: boolean) => void;
-  movie: any;
-  setMovie: (value: any) => void;
 }
 
 
@@ -26,8 +22,6 @@ export const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }
   const [page, setPage] = useState<number>(1);
   const [genresId,  setGenresId] = useState<number[]>([]);
   const [movieSelected, setMovieSelected] = useState<number>(12);
-  const [changed, setChanged] = useState<boolean>(false);
-  const [movie, setMovie] = useState<any>(null);
 
   const value: ContextProps = {
     page,
@@ -36,10 +30,6 @@ export const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }
     setGenresId,
     movieSelected,
     setMovieSelected,
-    changed,
-    setChanged,
-    movie,
-    setMovie
   };
 
   return <MyContext.Provider value={value}>{children}</MyContext.Provider>;
