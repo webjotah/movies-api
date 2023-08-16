@@ -22,12 +22,15 @@ const MovieSelection: React.FC = () =>  {
         localStorage.setItem('vote_average', data.vote_average);
         localStorage.setItem('genres', JSON.stringify(data.genres));
         
-        const cast = data.credits.cast.map((actor: any) => ({
+        const cast = data.credits.cast
+        .filter((actor: any) => actor.known_for_department === "Acting")
+        .map((actor: any) => ({
           id: actor.id,
           name: actor.name,
           character: actor.character,
           profile_path: actor.profile_path,
         }));
+        
         localStorage.setItem('cast', JSON.stringify(cast));
 
         for(let i = 0; i < data.videos.results.length; i++){
