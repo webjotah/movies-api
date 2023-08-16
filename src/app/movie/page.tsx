@@ -17,7 +17,8 @@ const Movie: React.FC = () => {
   const [poster, setPoster] = useState<any>(null);
   const [runtime, setRuntime] = useState<any>(null);
   const [votes, setVotes] = useState<any>(null);
-  const[genres, setGenres] = useState<any>(null);
+  const [genres, setGenres] = useState<any[]>([]);
+  const [actors, setActors] = useState<any[]>([]);
   
 
   useEffect(() => {
@@ -30,6 +31,26 @@ const Movie: React.FC = () => {
         const newPoster = localStorage.getItem('poster_path');
         const newRuntime = localStorage.getItem('runtime');
         const newVotes = localStorage.getItem('vote_average');
+        const newGenres = localStorage.getItem('genres');
+        const newActors = localStorage.getItem('cast');
+
+        if(newGenres){
+          try {
+            const genres = JSON.parse(newGenres);
+            setGenres(genres);
+          } catch (error){
+            console.log("Erro no parsing de generos: ", error);
+          }
+        }
+
+        if(newActors){
+          try{
+            const actors = JSON.parse(newActors);
+            setActors(actors);
+          }  catch (error){
+            console.log("Erro no parsing de atores: ", error);
+          }
+        }
 
         setVotes(newVotes);
         setRuntime(newRuntime);
