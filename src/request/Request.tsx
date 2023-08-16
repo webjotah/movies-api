@@ -1,10 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 "use client"
 
 import { useMyContext } from '@/context/Context';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import MovieCard from '@/components/MovieCard';
 
 
 
@@ -33,15 +32,9 @@ const ApiComponent: React.FC = () => {
     return (
       <ul>
         {genresId.length > 0 ? movies.results.filter((movie: any) => movie.genre_ids.some((genreId: number) => genresId.includes(genreId))).map((movie: any) => (
-          <li key={movie.id}>
-            <Link href='../movie'><img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} onClick={() => (setMovieSelected(movie.id))}/></Link>
-            <h3>{movie.title}</h3>
-          </li>
+          <MovieCard key={movie.id} id={movie.id} picture={movie.poster_path} title={movie.title}/>
         )) : movies.results.map((movie: any) => (
-          <li key={movie.id}>
-            <Link href="../movie"><img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} onClick={() => (setMovieSelected(movie.id))}/></Link>
-            <h3>{movie.title}</h3>
-          </li>
+          <MovieCard key={movie.id} id={movie.id} picture={movie.poster_path} title={movie.title}/>
         ))}
       </ul>
     );
