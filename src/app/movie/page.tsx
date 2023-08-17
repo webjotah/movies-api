@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Youtube from "react-youtube";
 
 const opts = {
@@ -9,6 +9,8 @@ const opts = {
 }
 
 const Movie: React.FC = () => {
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [storedTitle, setStoredTitle] = useState<any>(null);
   const [trailer, setTrailer] = useState<any>(null);
@@ -64,13 +66,23 @@ const Movie: React.FC = () => {
 
     handleStorageChange();
   }, []);
+  
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
-  return (
-    <div>
-      <h2>Título do Filme: {storedTitle}</h2>
-      <Youtube videoId={trailer} opts={opts}/>
-    </div>
-  );
+    return (
+      <div>
+    {isLoading ? (
+      <div>Loading...</div>
+    ) : (
+      <div>
+        <h2>{storedTitle}</h2>
+        <Youtube videoId={trailer} opts={opts} />
+      </div>
+    )}
+  </div>
+    );
 };
 
 export default Movie;
