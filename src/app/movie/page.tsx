@@ -2,6 +2,7 @@
 
 import React, { Suspense, useEffect, useState } from "react";
 import Youtube from "react-youtube";
+import LoadingOverlay from "@/components/Loading";
 
 const opts = {
   height: '320',
@@ -68,20 +69,18 @@ const Movie: React.FC = () => {
   }, []);
   
   useEffect(() => {
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
   }, []);
 
     return (
+
       <div>
-    {isLoading ? (
-      <div>Loading...</div>
-    ) : (
-      <div>
+        <LoadingOverlay loading={isLoading} />
         <h2>{storedTitle}</h2>
         <Youtube videoId={trailer} opts={opts} />
       </div>
-    )}
-  </div>
     );
 };
 
