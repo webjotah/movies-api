@@ -9,14 +9,6 @@ import MovieSelection from '@/request/MovieRequest'
 import Movie from './movie/page'
 
 export default function Page(){
-
-  const handleFalse = () => {
-    localStorage.clear();
-  }
-  
-  window.addEventListener('popstate', handleFalse);
-
-
   return (
     <>
     <div>
