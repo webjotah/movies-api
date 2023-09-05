@@ -13,7 +13,6 @@ const MovieSelection: React.FC = () =>  {
       try {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${movieSelected}?&api_key=c20492d18a33e7f71968eb5377feb1cb&append_to_response=videos,credits`)
         const data = await response.json();
-        console.log(data);
         localStorage.setItem('title', data.title);
         localStorage.setItem('poster', data.poster_path);
         localStorage.setItem('overview', data.overview);

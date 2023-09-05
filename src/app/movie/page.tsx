@@ -75,7 +75,6 @@ const Movie: React.FC = () => {
   }, []);
 
     return (
-
       <div>
         <LoadingOverlay loading={isLoading} />
         <h2>{storedTitle}</h2>

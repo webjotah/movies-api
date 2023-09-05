@@ -10,7 +10,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ loading }) => {
       <BarLoader
         color='#FF0000'
         height={4}
-       />
+      />
     </div>
   ) : null;
 };
