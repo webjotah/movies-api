@@ -2,14 +2,28 @@ import React from "react";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useMyContext } from "@/context/Context";
-import { useState } from 'react';
+import { styled } from "@mui/system";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+//estilizar o autocomplete
+const theme = createTheme({
+  components: {
+    MuiAutocomplete: {
+      styleOverrides: {
+        listbox: {
+          backgroundColor: '#1F2937',
+          color: '#F9FAFB',
+        },
+      }
+    },
+  },
+});
 
 //chamar o context
 
 const GenreSelection: React.FC = () => {
-  const { genresId,  setGenresId } = useMyContext();
-  
+  const { genresId, setGenresId } = useMyContext();
+
   const generos = [
     { title: 'Ação', id: 28 },
     { title: 'Aventura', id: 12 },
@@ -32,27 +46,25 @@ const GenreSelection: React.FC = () => {
     { title: 'Faroeste', id: 37 },
   ];
 
-
-
-
   return (
-    <Autocomplete
-      className="text-slate-100 w-1/3 bg-slate-50"
-      multiple
-      id="tags-outlined"
-      options={generos}
-      getOptionLabel={(option) => option.title}
-      filterSelectedOptions
-      onChange={(event: React.SyntheticEvent<Element, Event>, value: { title: string; id: number; }[]) => {
-        setGenresId(value.map(item => item.id));
-}}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Escolha um gênero"
-        />
-      )}
-    />
+    <ThemeProvider theme={theme}>
+      <Autocomplete
+        className="text-slate-100 w-1/3 bg-slate-50"
+        multiple
+        id="tags-outlined"
+        options={generos}
+        getOptionLabel={(option) => option.title}
+        renderOption={(props, option) => (
+          <li {...props}>
+            {option.title}
+          </li>
+        )}
+        onChange={(event: React.SyntheticEvent<Element, Event>, value: { title: string; id: number; }[]) => {
+          setGenresId(value.map(item => item.id));
+        }}
+        renderInput={(params) => <TextField {...params} placeholder="Gêneros" />}
+      />
+    </ThemeProvider>
   );
 }
 
